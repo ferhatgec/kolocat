@@ -1,0 +1,215 @@
+!required_flag("source")
+
+// C++ STL
+#import <ios>
+#import <stdstr>
+
+#include <Colors>
+
+// C++ PlusPlus
+#import <FileSystemPlusPlus.hpp>
+#import <StringTools.hpp>
+
+
+
+@Line(unsign _line_number) void {
+    if (_line_number<8) {
+        @print _line_number
+        @print (" │  ")
+    }
+    els {
+        if (_line_number==8||_line_number==98||_line_number==998||_line_number==9998) {
+            @print _line_number
+            @print (" ╰  ")
+        }
+	    elsif (_line_number==9||_line_number==99||_line_number==999||_line_number==9999) {
+	        @print _line_number
+	        @print ("  ╮ ")
+	    }
+	    els {
+	        @print _line_number
+	        @print (" │  ")
+	    }
+    }
+}
+
+@IsComment(string line) std::string {
+    if (stringtools::ltrim(line)[0]=='/'&&stringtools::ltrim(line)[1]=='/') {
+        @return stringtools::STR(WLIGHT_BLACK_COLOR)+line+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR)
+    }
+
+    @return line
+}
+
+@Languages class {
+~public
+    @Predefined(string line) std::string {
+        #stringtools::replaceAll(line,"::",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"::"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"{",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"{"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"}",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"}"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"(",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"("+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,")",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+")"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"*",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"*"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"<",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"<"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,">",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+">"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"+",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"+"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        @return line
+    }
+
+    @Regular(string line, unsign line_number) void {
+    	#stringtools::replaceAll(line,"int ",stringtools::STR(WBOLD_RED_COLOR)+"int "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+    	#stringtools::replaceAll(line,"char ",stringtools::STR(WBOLD_BLUE_COLOR)+"char "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+    	#stringtools::replaceAll(line,"const ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"const "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+    	#stringtools::replaceAll(line,"void ",stringtools::STR(WBOLD_BLUE_COLOR)+"void "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	@line=Predefined(line)
+
+    	@Line(line_number)
+
+    	@print line
+    	@print "\n"
+    }
+
+    @CPlusPlus(string line, unsign line_number) void {
+    	#stringtools::replaceAll(line,"int ",stringtools::STR(WBOLD_BLUE_COLOR)+"int "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"long ",stringtools::STR(WBOLD_BLUE_COLOR)+"long "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"bool",stringtools::STR(WBOLD_BLUE_COLOR)+"int "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"char ",stringtools::STR(WBOLD_BLUE_COLOR)+"char "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"auto ",stringtools::STR(WBOLD_BLUE_COLOR)+"auto "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+
+    	#stringtools::replaceAll(line,"if",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"if"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"else",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"else"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"for",stringtools::STR(WBOLD_MAGENTA_COLOR)+"for"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"do",stringtools::STR(WBOLD_MAGENTA_COLOR)+"do"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"while",stringtools::STR(WBOLD_MAGENTA_COLOR)+"while"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"void ",stringtools::STR(WBOLD_RED_COLOR)+"void "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"main",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"main"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"asm",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"asm"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"const ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"const "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"static ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"static "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"extern ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"extern "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"inline ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"inline"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"virtual ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"virtual "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"friend ",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"friend "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"public",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"public"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"private",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"private"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"protected",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"protected"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#include",stringtools::STR(WBOLD_YELLOW_COLOR)+"#include"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"typedef ",stringtools::STR(WBOLD_MAGENTA_COLOR)+"typedef "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#define ",stringtools::STR(WBOLD_MAGENTA_COLOR)+"#define "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#ifndef ",stringtools::STR(WBOLD_MAGENTA_COLOR)+"#ifndef "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#ifdef ",stringtools::STR(WBOLD_MAGENTA_COLOR)+"#ifdef "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#endif",stringtools::STR(WBOLD_MAGENTA_COLOR)+"#endif"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"return ",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"return "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"nodiscard",stringtools::STR(WBOLD_LIGHT_BLACK_COLOR)+"nodiscard"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"class ",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"class "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"struct ",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"struct "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"namespace ",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"namespace "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"using ",stringtools::STR(WBOLD_GREEN_COLOR)+"using "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"std",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"std"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"iostream",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"iostream"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"cstring",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"cstring"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"sstream",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"sstream"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"fstream",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"fstream"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"memory",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"memory"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"cstdlib",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"cstdlib"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"cstdio",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"cstdio"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"vector",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"vector"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"algorithm",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"algorithm"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"thread",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"thread"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"array",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"array"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"bitset",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"bitset"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"deque",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"deque"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"map",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"map"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"stack",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"stack"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"set",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"set"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"iterator",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"iterator"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"tuple",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"tuple"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"locale",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"locale"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"regex",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"regex"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"istream",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"istream"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"ostream",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"ostream"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"cout",stringtools::STR(WBOLD_CYAN_COLOR)+"cout"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"printf",stringtools::STR(WBOLD_CYAN_COLOR)+"printf"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"getline",stringtools::STR(WBOLD_CYAN_COLOR)+"getline"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"cin",stringtools::STR(WBOLD_CYAN_COLOR)+"cin"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        @line=Predefined(line)
+
+        @line=IsComment(line)
+
+    	@Line(line_number)
+
+    	@print line
+    	@print "\n"
+    }
+}

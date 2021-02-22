@@ -1,0 +1,166 @@
+// MIT License
+//
+// Copyright (c) 2021 Ferhat Geçdoğan All Rights Reserved.
+// Distributed under the terms of the MIT License.
+//
+
+!required_flag("source")
+
+!flag("hash-cache=false")
+
+!flag("output=kolocat")
+!flag("cpp-standard=c++17")
+!flag("cpp-output=true")
+!flag("cpp-sysroot=false")
+
+!flag("cpp-compiler=default")
+
+!flag("cpp-flags=false")
+
+!include_dir("lib/")
+!include_dir("cpplib/")
+!include_dir("src/")
+
+!add_source("lib/Colors")
+!add_source("src/Languages")
+
+// C++ STL
+#import <ios>
+#import <stdstr>
+
+// C++ PlusPlus
+// For GetCurrentWorkingDir()
+#import <FileSystemPlusPlus.hpp>
+
+// For Find() and LTrim() [will be implemented for Kalem soon]
+#import <StringTools.hpp>
+
+#include <Colors>
+#include <Languages>
+
+#defn VERSION "0.1-beta-1"
+
+@ReadFile(string file) void {
+    string line "."
+
+    unsign line_number 0
+
+    #Languages lang;
+
+    // C++ linker to use directly C++ code in Kalem (#)
+    #std::ifstream readfile((fsplusplus::GetCurrentWorkingDir() + "/" + file).c_str());
+
+	if (readfile.is_open()) {
+        if (stringtools::Find(file,".cpp")==true||stringtools::Find(file,".hpp")==true) {
+            loop (std::getline(readfile,line)) {
+                line_number++
+                @lang.CPlusPlus(line, line_number)
+            }
+        }
+        els {
+            loop (std::getline(readfile,line)) {
+                line_number++
+                @lang.Regular(line, line_number)
+            }
+        }
+
+        #readfile.close();
+    }
+    els {
+        @print "Unable to open file : "
+        @print file
+        @print "\n"
+    }
+}
+
+@centerText(string text, string language) void {
+    @print "🔒 \033[0;95m"
+    @print text
+    @print "\033[0m \033[0;94m│\033[0m "
+    @print language
+    @print "\n "
+}
+
+@printHalfBox_Top(int len) void {
+	@print WBOLD_YELLOW_COLOR
+
+	// Corners
+	@print ("  ╭")
+
+    int a 0
+
+	loop (a!=len) {
+		@print "───"
+	    ++a
+	}
+
+	// Corners
+	@print ("╮\n  │ ")
+
+	@print WRESETB
+}
+
+@printHalfBox_Bottom(int len) void {
+	@print WBOLD_LIGHT_CYAN_COLOR
+
+	// Corners
+	@print (" ╰")
+
+    int a 0
+
+	loop (a!=len) {
+		@print "───"
+	    ++a
+	}
+
+	// Corners
+	@print ("╯\n")
+
+	@print WRESETB
+}
+
+@main int {
+    if (argc < 2) {
+        // TODO: Implement Colorized library
+
+        @print WBOLD_RED_COLOR
+	    @print "Fegeya "
+
+	    @print WBOLD_GREEN_COLOR
+	    @print "Kolocat "
+
+	    @print WBOLD_BLUE_COLOR
+	    @print VERSION
+
+	    @print WBOLD_YELLOW_COLOR
+	    @print "\nColorized 'cat' implementation.\n"
+
+	    @print WBOLD_LIGHT_MAGENTA_COLOR
+    	@print argv[0]
+    	@print "[file]\n"
+
+        @return 0
+
+    }
+
+    string argv_str nil
+
+    @argv_str.append(argv[1])
+
+    // Set default width size.
+    @printHalfBox_Top(10)
+
+    if (stringtools::Find(argv_str, ".cpp")||stringtools::Find(argv_str,".hpp")) {
+    	@centerText(argv_str, "\033[1;91mC++\033[0m")
+    }
+    els {
+        @centerText(argv_str, "Regular")
+    }
+
+    // Set default width size.
+    @printHalfBox_Bottom(10)
+
+    @ReadFile(argv_str)
+
+    @return 0
+}
