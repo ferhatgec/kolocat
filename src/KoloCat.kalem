@@ -57,6 +57,18 @@
                 @lang.CPlusPlus(line, line_number)
             }
         }
+        elsif (stringtools::Find(file,".fls")==true) {
+            loop (std::getline(readfile,line)) {
+                line_number++
+                @lang.FlaScript(line, line_number)
+            }
+        }
+        elsif (stringtools::Find(file,".py")==true) {
+            loop (std::getline(readfile,line)) {
+                line_number++
+                @lang.Python(line, line_number)
+            }
+        }
         els {
             loop (std::getline(readfile,line)) {
                 line_number++
@@ -152,6 +164,12 @@
 
     if (stringtools::Find(argv_str, ".cpp")||stringtools::Find(argv_str,".hpp")) {
     	@centerText(argv_str, "\033[1;91mC++\033[0m")
+    }
+    elsif (stringtools::Find(argv_str,".fls")) {
+        @centerText(argv_str, "\033[1;33mFlaScript\033[0m")
+    }
+    elsif (stringtools::Find(argv_str,".py")) {
+        @centerText(argv_str, "\033[1;32mPython\033[0m")
     }
     els {
         @centerText(argv_str, "Regular")

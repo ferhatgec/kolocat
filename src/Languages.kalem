@@ -33,8 +33,11 @@
     }
 }
 
-@IsComment(string line) std::string {
-    if (stringtools::ltrim(line)[0]=='/'&&stringtools::ltrim(line)[1]=='/') {
+@IsComment(string line, int type) std::string {
+    if (type==0&&stringtools::ltrim(line)[0]=='/'&&stringtools::ltrim(line)[1]=='/') {
+        @return stringtools::STR(WLIGHT_BLACK_COLOR)+line+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR)
+    }
+    elsif (type==1&&stringtools::ltrim(line)[0]=='#') {
         @return stringtools::STR(WLIGHT_BLACK_COLOR)+line+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR)
     }
 
@@ -205,7 +208,117 @@
 
         @line=Predefined(line)
 
-        @line=IsComment(line)
+        @line=IsComment(line, 0)
+
+    	@Line(line_number)
+
+    	@print line
+    	@print "\n"
+    }
+
+    @FlaScript(string line, unsign line_number) void {
+        #stringtools::replaceAll(line,"print",stringtools::STR(WBOLD_CYAN_COLOR)+"print"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"fprintf",stringtools::STR(WBOLD_CYAN_COLOR)+"fprintf"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"@echo",stringtools::STR(WBOLD_CYAN_COLOR)+"@echo"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"fprintln",stringtools::STR(WBOLD_CYAN_COLOR)+"fprintln"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"@append",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"@append"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"@pop_back",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"@pop_back"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"@between",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"@between"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"@escape_seq",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"@escape_seq"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"@input",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"@input"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"var ",stringtools::STR(WBOLD_BLUE_COLOR)+"var "+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"bool",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"bool"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"int",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"int"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"string",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"string"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+        #stringtools::replaceAll(line,"put",stringtools::STR(WBOLD_MAGENTA_COLOR)+"put"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"if",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"if"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"else",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"else"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"for",stringtools::STR(WBOLD_MAGENTA_COLOR)+"for"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"do",stringtools::STR(WBOLD_MAGENTA_COLOR)+"do"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"while",stringtools::STR(WBOLD_MAGENTA_COLOR)+"while"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"func",stringtools::STR(WBOLD_RED_COLOR)+"void"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"main",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"main"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"import",stringtools::STR(WBOLD_YELLOW_COLOR)+"import"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"defin",stringtools::STR(WBOLD_MAGENTA_COLOR)+"defin"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#ifdef",stringtools::STR(WBOLD_MAGENTA_COLOR)+"#ifdef"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"#endif",stringtools::STR(WBOLD_MAGENTA_COLOR)+"#endif"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"return",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"return"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"SystemInfo",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"SystemInfo"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"Colorized",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"Colorized"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"newline",stringtools::STR(WBOLD_LIGHT_BLACK_COLOR)+"newline"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	@line=Predefined(line)
+
+        @line=IsComment(line, 0)
+
+    	@Line(line_number)
+
+    	@print line
+    	@print "\n"
+    }
+
+    @Python(string line, unsigned line_number) void {
+    	#stringtools::replaceAll(line,"if",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"if"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"else",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"else"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"elif",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"elif"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"for",stringtools::STR(WBOLD_MAGENTA_COLOR)+"for"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"while",stringtools::STR(WBOLD_MAGENTA_COLOR)+"while"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"str",stringtools::STR(WBOLD_BLUE_COLOR)+"str"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"bool",stringtools::STR(WBOLD_BLUE_COLOR)+"bool"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"float",stringtools::STR(WBOLD_BLUE_COLOR)+"float"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"def",stringtools::STR(WBOLD_RED_COLOR)+"def"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"lambda",stringtools::STR(WBOLD_RED_COLOR)+"lambda"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"import",stringtools::STR(WBOLD_YELLOW_COLOR)+"import"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"from",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"from"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"global",stringtools::STR(WBOLD_LIGHT_BLUE_COLOR)+"global"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"return",stringtools::STR(WBOLD_LIGHT_MAGENTA_COLOR)+"return"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	#stringtools::replaceAll(line,"print",stringtools::STR(WBOLD_CYAN_COLOR)+"print"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
+
+    	@line=Predefined(line)
+
+        @line=IsComment(line, 1)
 
     	@Line(line_number)
 
