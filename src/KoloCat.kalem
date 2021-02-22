@@ -137,7 +137,7 @@
 
 	    @print WBOLD_LIGHT_MAGENTA_COLOR
     	@print argv[0]
-    	@print "[file]\n"
+    	@print (" [file]\n")
 
         @return 0
 
