@@ -13,39 +13,38 @@
 
 
 @Line(unsign _line_number) void {
-    if (_line_number<8) {
+    if _line_number<8 {
         @print _line_number
-        @print (" │  ")
+        @print " │  "
     }
     els {
-        if (_line_number==8||_line_number==98||_line_number==998||_line_number==9998) {
+        if _line_number==8||_line_number==98||_line_number==998||_line_number==9998 {
             @print _line_number
-            @print (" ╰  ")
+            @print " ╰  "
         }
-	    elsif (_line_number==9||_line_number==99||_line_number==999||_line_number==9999) {
+	    elsif _line_number==9||_line_number==99||_line_number==999||_line_number==9999 {
 	        @print _line_number
-	        @print ("  ╮ ")
+	        @print "  ╮ "
 	    }
 	    els {
 	        @print _line_number
-	        @print (" │  ")
+	        @print " │  "
 	    }
     }
 }
 
 @IsComment(string line, int type) std::string {
-    if (type==0&&stringtools::ltrim(line)[0]=='/'&&stringtools::ltrim(line)[1]=='/') {
+    if type==0&&stringtools::ltrim(line)[0]=='/'&&stringtools::ltrim(line)[1]=='/' {
         @return stringtools::STR(WLIGHT_BLACK_COLOR)+line+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR)
     }
-    elsif (type==1&&stringtools::ltrim(line)[0]=='#') {
+    elsif type==1&&stringtools::ltrim(line)[0]=='#' {
         @return stringtools::STR(WLIGHT_BLACK_COLOR)+line+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR)
     }
 
     @return line
 }
 
-@Languages class {
-~public
+@Languages namespace {
     @Predefined(string line) std::string {
         #stringtools::replaceAll(line,"::",stringtools::STR(WBOLD_LIGHT_YELLOW_COLOR)+"::"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
 
@@ -285,7 +284,7 @@
     	@print "\n"
     }
 
-    @Python(string line, unsigned line_number) void {
+    @Python(string line, unsign line_number) void {
     	#stringtools::replaceAll(line,"if",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"if"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));
 
     	#stringtools::replaceAll(line,"else",stringtools::STR(WBOLD_LIGHT_RED_COLOR)+"else"+stringtools::STR(WBOLD_LIGHT_WHITE_COLOR));

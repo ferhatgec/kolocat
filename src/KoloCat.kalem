@@ -4,6 +4,8 @@
 // Distributed under the terms of the MIT License.
 //
 
+// Kalem.rs implementation of ColoCat.
+
 !required_flag("source")
 
 !flag("hash-cache=false")
@@ -17,12 +19,13 @@
 
 !flag("cpp-flags=false")
 
-!include_dir("lib/")
-!include_dir("cpplib/")
-!include_dir("src/")
+!include_dir(".")
+!include_dir("./lib/")
+!include_dir("./cpplib/")
+!include_dir("./src/")
 
-!add_source("lib/Colors")
-!add_source("src/Languages")
+!add_source("./lib/Colors")
+!add_source("./src/Languages")
 
 // C++ STL
 #import <ios>
@@ -45,34 +48,32 @@
 
     unsign line_number 0
 
-    #Languages lang;
-
     // C++ linker to use directly C++ code in Kalem (#)
     #std::ifstream readfile((fsplusplus::GetCurrentWorkingDir() + "/" + file).c_str());
 
-	if (readfile.is_open()) {
-        if (stringtools::Find(file,".cpp")==true||stringtools::Find(file,".hpp")==true) {
-            loop (std::getline(readfile,line)) {
+	if readfile.is_open() {
+        if stringtools::Find(file, ".cpp") == true || stringtools::Find(file,".hpp") == true {
+            loop std::getline(readfile,line) {
                 line_number++
-                @lang.CPlusPlus(line, line_number)
+                @Languages::CPlusPlus(line, line_number)
             }
         }
-        elsif (stringtools::Find(file,".fls")==true) {
-            loop (std::getline(readfile,line)) {
+        elsif stringtools::Find(file, ".fls") == true {
+            loop std::getline(readfile,line) {
                 line_number++
-                @lang.FlaScript(line, line_number)
+                @Languages::FlaScript(line, line_number)
             }
         }
-        elsif (stringtools::Find(file,".py")==true) {
-            loop (std::getline(readfile,line)) {
+        elsif stringtools::Find(file, ".py") ==true {
+            loop std::getline(readfile,line) {
                 line_number++
-                @lang.Python(line, line_number)
+                @Languages::Python(line, line_number)
             }
         }
         els {
-            loop (std::getline(readfile,line)) {
+            loop std::getline(readfile,line) {
                 line_number++
-                @lang.Regular(line, line_number)
+                @Languages::Regular(line, line_number)
             }
         }
 
@@ -97,17 +98,17 @@
 	@print WBOLD_YELLOW_COLOR
 
 	// Corners
-	@print ("  ╭")
+	@print "  ╭"
 
     int a 0
 
-	loop (a!=len) {
+	loop a != len {
 		@print "───"
 	    ++a
 	}
 
 	// Corners
-	@print ("╮\n  │ ")
+	@print "╮\n  │ "
 
 	@print WRESETB
 }
@@ -116,23 +117,23 @@
 	@print WBOLD_LIGHT_CYAN_COLOR
 
 	// Corners
-	@print (" ╰")
+	@print " ╰"
 
     int a 0
 
-	loop (a!=len) {
+	loop a != len {
 		@print "───"
 	    ++a
 	}
 
 	// Corners
-	@print ("╯\n")
+	@print "╯\n"
 
 	@print WRESETB
 }
 
 @main int {
-    if (argc < 2) {
+    if argc < 2 {
         // TODO: Implement Colorized library
 
         @print WBOLD_RED_COLOR
@@ -149,7 +150,7 @@
 
 	    @print WBOLD_LIGHT_MAGENTA_COLOR
     	@print argv[0]
-    	@print (" [file]\n")
+    	@print " [file]\n"
 
         @return 0
 
@@ -162,13 +163,13 @@
     // Set default width size.
     @printHalfBox_Top(10)
 
-    if (stringtools::Find(argv_str, ".cpp")||stringtools::Find(argv_str,".hpp")) {
+    if stringtools::Find(argv_str, ".cpp") || stringtools::Find(argv_str, ".hpp") {
     	@centerText(argv_str, "\033[1;91mC++\033[0m")
     }
-    elsif (stringtools::Find(argv_str,".fls")) {
+    elsif stringtools::Find(argv_str, ".fls") {
         @centerText(argv_str, "\033[1;33mFlaScript\033[0m")
     }
-    elsif (stringtools::Find(argv_str,".py")) {
+    elsif stringtools::Find(argv_str, ".py") {
         @centerText(argv_str, "\033[1;32mPython\033[0m")
     }
     els {
