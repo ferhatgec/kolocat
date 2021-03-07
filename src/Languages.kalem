@@ -207,7 +207,7 @@
 
         @line=Predefined(line)
 
-        @line=IsComment(line, 0)
+        @line=IsComment(line,0)
 
     	@Line(line_number)
 
@@ -276,7 +276,7 @@
 
     	@line=Predefined(line)
 
-        @line=IsComment(line, 0)
+        @line=IsComment(line,0)
 
     	@Line(line_number)
 
@@ -317,7 +317,7 @@
 
     	@line=Predefined(line)
 
-        @line=IsComment(line, 1)
+        @line=IsComment(line,1)
 
     	@Line(line_number)
 
