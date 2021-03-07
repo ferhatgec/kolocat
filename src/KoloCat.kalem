@@ -27,9 +27,9 @@
 !add_source("./lib/Colors")
 !add_source("./src/Languages")
 
-// C++ STL
-#import <ios>
-#import <stdstr>
+// STL
+#include <ios>
+#include <stdstr>
 
 // C++ PlusPlus
 // For GetCurrentWorkingDir()

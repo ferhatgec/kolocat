@@ -1,9 +1,5 @@
 !required_flag("source")
 
-// C++ STL
-#import <ios>
-#import <stdstr>
-
 #include <Colors>
 
 // C++ PlusPlus
