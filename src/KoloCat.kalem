@@ -28,8 +28,15 @@
 !add_source("./src/Languages")
 
 // STL
-#include <ios>
-#include <stdstr>
+#include {
+    <ios>
+    <stdstr>
+    <stream>
+    <vect>
+
+    <Colors>
+    <Languages>
+}
 
 // C++ PlusPlus
 // For GetCurrentWorkingDir()
@@ -37,9 +44,6 @@
 
 // For Find() and LTrim() [will be implemented for Kalem soon]
 #import <StringTools.hpp>
-
-#include <Colors>
-#include <Languages>
 
 #defn VERSION "0.1-beta-1"
 
