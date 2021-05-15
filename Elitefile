@@ -1,0 +1,29 @@
+\\ https://github.com/ferhatgec/elite
+\\ https://github.com/ferhatgec/elite.cpp
+
+required_version 0.1
+
+set SUDO     as "sudo"
+set COPY     as "cp"
+
+set OUTPUT   as "kolocat"
+set COMPILER as "kalem"
+
+set SRC      as "src"
+set SOURCE   as "KoloCat.kalem"
+
+for signal "start [
+    for argument "make" [
+        use exec "{COMPILER} {SRC}/{SOURCE}"
+    ]
+
+    for argument "install" [
+        use exec "{COMPILER} {SRC}/{SOURCE}"
+
+        for exists $OUTPUT [
+            use exec "{SUDO} {COPY} {OUTPUT} /bin/{OUTPUT}"
+        ]
+    ]
+
+    use signal "exit"
+]
